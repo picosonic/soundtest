@@ -1,0 +1,41 @@
+{
+    "version": "0.1.0",
+    "command": "bash",
+    "isShellCommand": true,
+    "showOutput": "always",
+    "echoCommand": true,
+    "suppressTaskName": true,
+    "args": [
+        "-c"
+    ],
+    "tasks": [
+        {
+            "taskName": "sounds.ssd",
+            "problemMatcher": {
+                "owner": "6502",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceRoot}"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "severity": 3,
+                    "message": 4
+                }
+            },
+            "args": [
+                "beebasm -v -i ${workspaceFolder}/sounds.asm -do ${workspaceFolder}/sounds.ssd -boot SOUNDS -title 'SOUNDS'"
+            ],
+            "isBuildCommand": true
+        },
+        {
+            "taskName": "Run 'sounds.ssd' in Emulator",
+            "isTestCommand": true,
+            "args": [
+                "beebjit -0 ${workspaceFolder}/sounds.ssd"
+            ]
+        }
+    ]
+}
